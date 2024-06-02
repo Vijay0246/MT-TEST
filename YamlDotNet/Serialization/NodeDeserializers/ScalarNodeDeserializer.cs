@@ -141,7 +141,7 @@ namespace YamlDotNet.Serialization.NodeDeserializers
             return true;
         }
 
-        private object DeserializeBooleanHelper(string value)
+        private static object DeserializeBooleanHelper(string value)
         {
             bool result;
 
@@ -260,7 +260,7 @@ namespace YamlDotNet.Serialization.NodeDeserializers
                     result *= 60;
 
                     // TODO: verify that chunks after the first are non-negative and less than 60
-                    result += ulong.Parse(chunks[chunkIndex].Replace("_", ""));
+                    result += ulong.Parse(chunks[chunkIndex].Replace("_", ""), CultureInfo.InvariantCulture);
                 }
             }
 
@@ -396,7 +396,7 @@ namespace YamlDotNet.Serialization.NodeDeserializers
                     }
                     else if (Regex.IsMatch(v, @"^[-+]?(\.inf|\.Inf|\.INF)$")) //infinities
                     {
-                        if (v.StartsWith("-"))
+                        if (v.StartsWith('-'))
                         {
                             result = float.NegativeInfinity;
                         }
