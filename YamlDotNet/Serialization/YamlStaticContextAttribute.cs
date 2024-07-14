@@ -23,6 +23,7 @@ using System;
 
 namespace YamlDotNet.Serialization
 {
+    [AttributeUsage(AttributeTargets.Class)]
     public sealed class YamlStaticContextAttribute : Attribute
     {
     }
